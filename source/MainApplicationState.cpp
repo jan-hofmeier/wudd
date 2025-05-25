@@ -58,7 +58,7 @@ void MainApplicationState::render() {
         }
         WiiUScreen::drawLine();
         if (!gRunFromHBL) {
-            WiiUScreen::drawLinef("%s Exit", this->selectedOptionY == 5 ? ">" : " ");
+            WiiUScreen::drawLinef("%s Exit", this->selectedOptionY == 4 ? ">" : " ");
         }
     }
 
