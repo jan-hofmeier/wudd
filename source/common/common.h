@@ -10,6 +10,8 @@
 extern ntfs_md *ntfs_mounts;
 extern int ntfs_mount_count;
 
+extern BOOL usb_mounted;
+
 extern FSAClientHandle gFSAClientHandle;
 
 extern BOOL gRunFromHBL;
@@ -19,5 +21,6 @@ extern uint32_t gBlockHomeButtonCooldown;
 
 enum eDumpTarget {
     TARGET_SD,
-    TARGET_NTFS
+    TARGET_NTFS,
+    TARGET_USB,
 };

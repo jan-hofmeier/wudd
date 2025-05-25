@@ -448,6 +448,9 @@ std::string GMPartitionsDumperState::getPathForDevice(eDumpTarget target) const 
     if (target == TARGET_NTFS) {
         return "ntfs0:/";
     }
+    if (target == TARGET_USB) {
+        return "fs:/vol/storage_usb01/";
+    }
     return "fs:/vol/external01/";
 }
 

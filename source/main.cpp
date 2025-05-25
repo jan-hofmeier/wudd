@@ -84,7 +84,12 @@ int main(int argc, char **argv) {
         OSFatal("Failed to unlock FSAClientHandle");
     }
 
+    usb_mounted = Mocha_MountFS("storage_usb01", nullptr, "/vol/storage_usb01") == MOCHA_RESULT_SUCCESS;
+
     main_loop();
+
+    if(usb_mounted)
+        Mocha_UnmountFS("storage_usb01");
 
     FSADelClient(gFSAClientHandle);
 

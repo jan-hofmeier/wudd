@@ -5,3 +5,4 @@ BOOL gRunFromHBL                  = false;
 BOOL gBlockHomeButton             = false;
 uint32_t gBlockHomeButtonCooldown = 0;
 FSAClientHandle gFSAClientHandle  = 0;
+BOOL usb_mounted                  = false;

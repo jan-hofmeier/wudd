@@ -47,13 +47,18 @@ void MainApplicationState::render() {
         WiiUScreen::drawLine();
         WiiUScreen::drawLinef("%s Dumptarget:", this->selectedOptionY == 3 ? ">" : " ");
         if (ntfs_mount_count > 0) {
-            WiiUScreen::drawLinef("     [%s] SD    [%s] NTFS (USB)", dumpTarget == TARGET_SD ? "x" : " ", dumpTarget == TARGET_NTFS ? "x" : " ");
+            WiiUScreen::drawLinef("     [%s] SD    [%s] USB (NTFS)", dumpTarget == TARGET_SD ? "x" : " ", dumpTarget == TARGET_NTFS ? "x" : " ");
         } else {
-            WiiUScreen::drawLinef("     [%s] SD    ???  NTFS (USB) (not connected)", dumpTarget == TARGET_SD ? "*" : " ");
+            WiiUScreen::drawLinef("     [%s] SD    ???  USB (NTFS) (not connected)", dumpTarget == TARGET_SD ? "*" : " ");
+        }
+        if (usb_mounted) {
+            WiiUScreen::drawLinef("     [%s] SD    [%s] USB (WFS)", dumpTarget == TARGET_SD ? "x" : " ", dumpTarget == TARGET_USB ? "x" : " ");
+        } else {
+            WiiUScreen::drawLinef("     [%s] SD    ???  USB (WFS) (not connected)", dumpTarget == TARGET_SD ? "*" : " ");
         }
         WiiUScreen::drawLine();
         if (!gRunFromHBL) {
-            WiiUScreen::drawLinef("%s Exit", this->selectedOptionY == 4 ? ">" : " ");
+            WiiUScreen::drawLinef("%s Exit", this->selectedOptionY == 5 ? ">" : " ");
         }
     }
 
@@ -67,12 +72,14 @@ ApplicationState::eSubState MainApplicationState::update(Input *input) {
         proccessMenuNavigationY(input, optionCount);
         if (selectedOptionY == 3) {
             if (ntfs_mount_count > 0) {
-                proccessMenuNavigationX(input, 2);
+                proccessMenuNavigationX(input, 3);
                 if (selectedOptionX == 0) {
                     dumpTarget = TARGET_SD;
-                } else {
+                } else if (selectedOptionX == 1) {
                     dumpTarget = TARGET_NTFS;
-                }
+                } else {
+                    dumpTarget = TARGET_USB;
+                }           
             }
         }
         if (entrySelected(input)) {
